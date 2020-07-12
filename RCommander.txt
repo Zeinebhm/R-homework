@@ -1,0 +1,20 @@
+
+> Notes <- readXL("C:/Users/hamdi/OneDrive/Desktop/Notes.xlsx", 
++   rownames=FALSE, header=TRUE, na="", sheet="Feuil1", stringsAsFactors=TRUE)
+
+> row.names(Notes) <- as.character(Notes$Sujet)
+
+> Notes$Sujet <- NULL
+
+> cor(Notes[,c("Français","Latin","Math","Musique","Sciences")], 
++   use="complete")
+           Français      Latin       Math     Musique    Sciences
+Français 1.00000000 0.95613107 0.22673193 0.038035989 0.396693238
+Latin    0.95613107 1.00000000 0.49049826 0.088601589 0.633985503
+Math     0.22673193 0.49049826 1.00000000 0.011183835 0.982535729
+Musique  0.03803599 0.08860159 0.01118384 1.000000000 0.006309933
+Sciences 0.39669324 0.63398550 0.98253573 0.006309933 1.000000000
+
+> scatterplotMatrix(~Français+Latin+Math+Musique+Sciences, regLine=FALSE, 
++   smooth=FALSE, diagonal=list(method="density"), data=Notes)
+

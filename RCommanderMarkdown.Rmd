@@ -1,0 +1,43 @@
+---
+title: "Replace with Main Title"
+author: "Your Name"
+date: "AUTOMATIC"
+---
+
+
+```{r echo=FALSE, message=FALSE}
+# include this code chunk as-is to set options
+knitr::opts_chunk$set(comment=NA, prompt=TRUE)
+library(Rcmdr)
+library(car)
+library(RcmdrMisc)
+```
+
+
+```{r echo=FALSE}
+# include this code chunk as-is to enable 3D graphs
+library(rgl)
+knitr::knit_hooks$set(webgl = hook_webgl)
+```
+
+
+```{r}
+Notes <- readXL("C:/Users/hamdi/OneDrive/Desktop/Notes.xlsx", 
+  rownames=FALSE, header=TRUE, na="", sheet="Feuil1", stringsAsFactors=TRUE)
+```
+
+```{r}
+row.names(Notes) <- as.character(Notes$Sujet)
+Notes$Sujet <- NULL
+```
+
+```{r}
+cor(Notes[,c("Français","Latin","Math","Musique","Sciences")], 
+  use="complete")
+```
+
+```{r}
+scatterplotMatrix(~Français+Latin+Math+Musique+Sciences, regLine=FALSE, 
+  smooth=FALSE, diagonal=list(method="density"), data=Notes)
+```
+
